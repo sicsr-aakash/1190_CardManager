@@ -1,0 +1,94 @@
+package com.cardmanager;
+
+import android.os.Bundle;
+import android.app.Activity;
+import android.content.Intent;
+import android.view.Menu;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
+import android.widget.Toast;
+
+public class CardEntryActivity extends Activity {
+	
+	
+	EditText card_number,card_name,card_holder_name,validity_date,cvv,pin,password,bank_name;
+	Button btn_submit,btn_reminder;
+	RadioGroup rg;
+	CardEntryHandler cardhandler;
+	String radioValue;
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_card_entry);
+		
+		card_number = (EditText) findViewById(R.id.Card_number);
+		card_name = (EditText) findViewById(R.id.Card_name);
+		card_holder_name = (EditText) findViewById(R.id.Card_holder_name);
+		validity_date = (EditText) findViewById(R.id.Validity_date);
+		cvv = (EditText) findViewById(R.id.Card_cvv);
+		pin = (EditText) findViewById(R.id.card_pin);
+		password = (EditText) findViewById(R.id.Card_pass);
+		bank_name = (EditText) findViewById(R.id.Card_bank_name);
+		btn_submit = (Button) findViewById(R.id.submit);
+		btn_reminder = (Button) findViewById(R.id.reminder);
+		rg =(RadioGroup) findViewById(R.id.radioGroup1);
+		if(rg.getCheckedRadioButtonId()!=-1){
+		    int id= rg.getCheckedRadioButtonId();
+		    View radioButton = rg.findViewById(id);
+		    int radioId = rg.indexOfChild(radioButton);
+		    RadioButton btn = (RadioButton) rg.getChildAt(radioId);
+		    radioValue=btn.getText().toString();
+		}
+		
+		
+		
+		btn_submit.setOnClickListener(new OnClickListener() {
+					
+					@Override
+					public void onClick(View v) {
+						
+						String get_card_number = card_number.getText().toString();
+						String get_card_name = card_name.getText().toString();
+						String get_card_holder_name = card_holder_name.getText().toString();
+						String get_validity_date = validity_date.getText().toString();
+						String get_cvv = cvv.getText().toString();
+						String get_pin = pin.getText().toString();
+						String get_password = password.getText().toString();
+						String get_bank_name = bank_name.getText().toString();
+						if(get_card_number.length() > 0 && get_card_name.length() > 0 && get_validity_date.length() > 0 && get_bank_name.length() > 0 && get_cvv.length() > 0 && get_pin.length() > 0 && get_password.length() > 0 && get_card_holder_name.length() > 0){
+							{
+						
+								cardhandler = new CardEntryHandler(getBaseContext());
+								cardhandler.open();
+								long id = cardhandler.registerUser(get_card_number,get_card_name,get_card_holder_name,get_validity_date,get_cvv,get_pin,get_password,get_bank_name,radioValue, getIntent().getExtras().getString("username"));
+								if(id>0){
+									Toast.makeText(getBaseContext(), "Registered successfully.", Toast.LENGTH_SHORT).show();
+								}
+								else
+								{
+									Toast.makeText(getBaseContext(), "not successfully.", Toast.LENGTH_SHORT).show();
+								}
+								Intent intentObject = new Intent(getApplicationContext(),MainActivity.class);
+								startActivity(intentObject);
+								
+								
+								cardhandler.close();
+							}	
+				}
+			   }//onClick.
+			});//setOnClickListener.
+							
+			}
+
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		// Inflate the menu; this adds items to the action bar if it is present.
+		getMenuInflater().inflate(R.menu.main_menu, menu);
+		return true;
+	}
+
+}

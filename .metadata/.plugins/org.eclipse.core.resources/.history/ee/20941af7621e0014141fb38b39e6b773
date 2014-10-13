@@ -1,0 +1,52 @@
+package com.cardmanager;
+
+
+
+import android.app.Activity;
+import android.os.Bundle;
+import android.view.Menu;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
+import android.widget.EditText;
+
+public class RegistrationActivity extends Activity {
+	
+	EditText full_name,email,passwd,re_passwd,phone;
+	Button btn_register,btn_back;
+	
+	
+	RegisterHandler handler;
+	
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_registration);
+		
+		full_name = (EditText) findViewById(R.id.editText1);
+		email = (EditText) findViewById(R.id.editText2);
+		phone = (EditText) findViewById(R.id.editText3);
+		passwd = (EditText) findViewById(R.id.editText4);
+		re_passwd = (EditText) findViewById(R.id.editText5);
+		btn_register = (Button) findViewById(R.id.button1);
+		btn_back = (Button) findViewById(R.id.button2);
+		
+		
+		btn_register.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				
+				String get_full_name = full_name.getText().toString();
+				String get_email = email.getText().toString();
+				String get_passwd = passwd.getText().toString();
+				String get_re_passwd = re_passwd.getText().toString();
+				String get_phone = phone.getText().toString();
+				
+				
+		
+		
+	}
+		
+	
+}}}

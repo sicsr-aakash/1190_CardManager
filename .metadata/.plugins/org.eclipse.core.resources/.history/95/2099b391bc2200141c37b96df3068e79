@@ -1,0 +1,112 @@
+package com.cardmanager;
+
+import android.os.Bundle;
+import android.app.Activity;
+import android.content.Intent;
+import android.view.Menu;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
+
+public class View_card2 extends Activity {
+	
+	private Button d_card;
+	private Button c_card;
+	private Button p_card;
+	private Button v_card;
+	private Button s_card;
+	private Button n_card;
+	private Button o_card;
+
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_view_card2);
+		
+		d_card=(Button)findViewById(R.id.button1);
+		c_card=(Button)findViewById(R.id.button2);
+		s_card=(Button)findViewById(R.id.button5);
+		n_card=(Button)findViewById(R.id.button6);
+		o_card=(Button)findViewById(R.id.button7);
+		
+		
+		d_card.setOnClickListener(new OnClickListener() 
+        {	
+			@Override
+			public void onClick(View v) 
+			{
+				Intent intentobj=new Intent(getApplicationContext(),Allcardno.class);
+				startActivity(intentobj);
+			}
+		});
+		
+		c_card.setOnClickListener(new OnClickListener() 
+        {	
+			@Override
+			public void onClick(View v) 
+			{
+				Intent intentobj=new Intent(getApplicationContext(),Allcardno.class);
+				startActivity(intentobj);
+			}
+		});
+		
+		p_card.setOnClickListener(new OnClickListener() 
+        {	
+			@Override
+			public void onClick(View v) 
+			{
+				Intent intentobj=new Intent(getApplicationContext(),Allcardno.class);
+				startActivity(intentobj);
+			}
+		});
+		
+		v_card.setOnClickListener(new OnClickListener() 
+        {	
+			@Override
+			public void onClick(View v) 
+			{
+				Intent intentobj=new Intent(getApplicationContext(),Allcardno.class);
+				startActivity(intentobj);
+			}
+		});
+		
+		s_card.setOnClickListener(new OnClickListener() 
+        {	
+			@Override
+			public void onClick(View v) 
+			{
+				Intent intentobj=new Intent(getApplicationContext(),Allcardno.class);
+				startActivity(intentobj);
+			}
+		});
+		
+		n_card.setOnClickListener(new OnClickListener() 
+        {	
+			@Override
+			public void onClick(View v) 
+			{
+				Intent intentobj=new Intent(getApplicationContext(),Allcardno.class);
+				startActivity(intentobj);
+			}
+		});
+		
+		o_card.setOnClickListener(new OnClickListener() 
+        {	
+			@Override
+			public void onClick(View v) 
+			{
+				Intent intentobj=new Intent(getApplicationContext(),Allcardno.class);
+				startActivity(intentobj);
+			}
+		});
+		
+	}
+
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		// Inflate the menu; this adds items to the action bar if it is present.
+		getMenuInflater().inflate(R.menu.main, menu);
+		return true;
+	}
+
+}

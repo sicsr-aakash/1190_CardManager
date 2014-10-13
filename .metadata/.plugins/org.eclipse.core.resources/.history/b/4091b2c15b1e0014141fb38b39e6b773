@@ -1,0 +1,43 @@
+package com.cardmanager;
+
+import android.app.Activity;
+import android.os.Bundle;
+import android.widget.Button;
+import android.widget.EditText;
+
+public class RegistrationActivity extends Activity {
+	
+	EditText full_name,email,passwd,re_passwd;
+	Button btn_register,btn_back;
+	
+	
+	RegisterHandler handler;
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_register);
+		final ActionBar bar = getActionBar();
+		bar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#FF8800")));
+		
+		txt_uname = (EditText) findViewById(R.id.register_editTextUsername);
+		txt_email = (EditText) findViewById(R.id.register_editTextEmail);
+		txt_password = (EditText) findViewById(R.id.register_editTextPassword);
+		btn_register = (Button) findViewById(R.id.register_buttonSubmit);
+		btn_back = (Button) findViewById(R.id.register_buttonBack);
+		
+		btn_register.setOnClickListener(new OnClickListener() {
+
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_registration);
+	}
+
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		// Inflate the menu; this adds items to the action bar if it is present.
+		getMenuInflater().inflate(R.menu.main, menu);
+		return true;
+	}
+
+}

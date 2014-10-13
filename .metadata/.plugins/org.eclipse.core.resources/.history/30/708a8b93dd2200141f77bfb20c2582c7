@@ -1,0 +1,15 @@
+package com.cardmanager;
+
+import java.util.List;
+
+import android.content.Context;
+import android.widget.ArrayAdapter;
+
+public class CustomAdapter extends ArrayAdapter<String> {
+
+	public CustomAdapter(Context context, List<String> objects) {
+		super(context, R.layout.row, objects);
+		// TODO Auto-generated constructor stub
+	}
+
+}

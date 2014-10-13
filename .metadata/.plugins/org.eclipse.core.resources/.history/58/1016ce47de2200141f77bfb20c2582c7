@@ -1,0 +1,21 @@
+package com.cardmanager;
+
+import java.util.ArrayList;
+
+import android.app.Activity;
+import android.os.Bundle;
+
+public class Allcardno extends Activity {
+
+	private ArrayList<String> names;
+	ListView listView;
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_allcardno);
+		CustomAdapter ca = new CustomAdapter(getApplicationContext(), names);
+		listView = (ListView) findViewById(R.id.all_cards);
+	}
+
+	
+}

@@ -1,0 +1,13 @@
+package com.cardmanager;
+
+public class Card {
+	private String card_no;
+	private String card_name;
+	private String card_holder_name;
+	private String card_validity;
+	private String card_pin;
+	private String card_cvv;
+	private String card_bank;
+	private String card_type;
+	private String card_user_email;
+}

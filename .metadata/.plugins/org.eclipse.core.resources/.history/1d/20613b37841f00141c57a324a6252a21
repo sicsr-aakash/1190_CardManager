@@ -1,0 +1,68 @@
+package com.cardmanager;
+
+import android.os.Bundle;
+import android.app.Activity;
+import android.view.Menu;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.RadioGroup;
+
+public class CardEntryActivity extends Activity {
+	
+	
+	EditText card_number,card_name,card_holder_name,validity_date,cvv,pin,password,bank_name;
+	
+	Button btn_submit,btn_reminder;
+	
+	RadioGroup d_card,c_card,v_card,s_card,n_card,o_card;
+
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_card_entry);
+		
+		card_number = (EditText) findViewById(R.id.Card_number);
+		card_name = (EditText) findViewById(R.id.Card_name);
+		card_holder_name = (EditText) findViewById(R.id.Card_holder_name);
+		validity_date = (EditText) findViewById(R.id.Validity_date);
+		cvv = (EditText) findViewById(R.id.Card_cvv);
+		pin = (EditText) findViewById(R.id.card_pin);
+		password = (EditText) findViewById(R.id.Card_pass);
+		bank_name = (EditText) findViewById(R.id.Card_bank_name);
+		btn_submit = (Button) findViewById(R.id.submit);
+		btn_reminder = (Button) findViewById(R.id.reminder);
+		d_card = (RadioGroup) findViewById(R.id.radio0);
+		c_card = (RadioGroup) findViewById(R.id.radio1);
+		v_card = (RadioGroup) findViewById(R.id.radio2);
+		s_card = (RadioGroup) findViewById(R.id.radio3);
+		n_card = (RadioGroup) findViewById(R.id.radio4);
+		o_card = (RadioGroup) findViewById(R.id.radio5);
+		
+		
+		
+		btn_submit.setOnClickListener(new OnClickListener() {
+					
+					@Override
+					public void onClick(View v) {
+						
+						String get_card_number = card_number.getText().toString();
+						String get_card_name = card_name.getText().toString();
+						String get_card_holder_name = card_holder_name.getText().toString();
+						String get_validity_date = validity_date.getText().toString();
+						String get_cvv = cvv.getText().toString();
+						String get_pin = pin.getText().toString();
+						String get_password = password.getText().toString();
+						String get_bank_name = bank_name.getText().toString();
+						//String get_dcard = d_card.getTe().toString();
+			}
+
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		// Inflate the menu; this adds items to the action bar if it is present.
+		getMenuInflater().inflate(R.menu.main, menu);
+		return true;
+	}
+
+}

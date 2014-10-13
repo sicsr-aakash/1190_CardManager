@@ -1,0 +1,94 @@
+package com.cardmanager;
+
+import android.content.ContentValues;
+import android.content.Context;
+import android.database.Cursor;
+import android.database.SQLException;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
+import android.widget.EditText;
+import android.widget.Toast;
+
+public class CardEntryHandler {
+	
+
+	public static final String CARD_NUMBER = "card_number";
+	public static final String CARD_NAME = "card_name";
+	public static final String CARD_HOLDER_NAME = "card_holder_name";
+	public static final String VALIDITY_DATE = "validity_date";
+	public static final String CARD_CVV = "card_cvv";
+	public static final String CARD_PIN = "card_pin";
+	public static final String CARD_PASSWORD = "card_password";
+	public static final String CARD_BANK_NAME = "card_bank_name";
+	public static final String TABLE_NAME = "user_card_detail";
+	public static final String DATABASE_NAME = "card1";
+	public static final String CARD_TYPE="card_type";
+	public static final String USER_ID = "user_id";
+	public static final int DATABASE_VERSION = 1;
+	public static final String USER_TABLE_CREATE = "create table "+TABLE_NAME+" (CARD_NUMBER integer primary key autoincrement,"+CARD_NAME+" text not"
+			+ " null,"+CARD_HOLDER_NAME+" text not null, "+CARD_PASSWORD+" text not null,"+CARD_BANK_NAME+" text not null,"+VALIDITY_DATE+" text not null,"+CARD_CVV+" text not null,"+CARD_PIN+" text not null, "+CARD_TYPE+" text not null," +USER_ID+" text not null);";
+	
+	
+	
+	DataBaseHelper dbhelper;
+	Context ctx;
+	SQLiteDatabase db;
+	public  CardEntryHandler(Context ctx){
+		this.ctx = ctx;
+		dbhelper = new DataBaseHelper(ctx);
+	}
+	private static class DataBaseHelper extends SQLiteOpenHelper{
+
+		public DataBaseHelper(Context ctx) {
+			super(ctx, DATABASE_NAME, null, DATABASE_VERSION);
+			
+		}
+
+		@Override
+		public void onCreate(SQLiteDatabase db) {
+			try{
+				db.execSQL(USER_TABLE_CREATE);
+			}catch(SQLException e)
+			{
+				e.printStackTrace();
+			}
+		}
+
+		@Override
+		public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+			
+			
+			db.execSQL("DROP TABLE IF EXISTS "+TABLE_NAME);
+			onCreate(db);
+		}
+		
+	}
+			
+	public CardEntryHandler open(){
+		
+		db = dbhelper.getWritableDatabase();
+		return this;
+	}
+	
+	public void close(){
+		dbhelper.close();
+	}
+	
+	public long registerUser(String get_card_number,String get_card_name,String get_card_holder_name,String get_validity_date,String get_cvv,String get_pin,String get_password,String get_bank_name, String card_type, String user_id){
+		ContentValues content = new ContentValues();
+		content.put(CARD_NUMBER, get_card_number);
+		content.put(CARD_NAME, get_card_name);
+		content.put(CARD_HOLDER_NAME, get_card_holder_name);
+		content.put(VALIDITY_DATE, get_validity_date);
+		content.put(CARD_CVV, get_cvv);
+		content.put(CARD_PIN, get_pin);
+		content.put(CARD_PASSWORD, get_password);
+		content.put(CARD_BANK_NAME, get_bank_name);
+		content.put(CARD_TYPE, card_type);
+		content.put(USER_ID , user_id);
+        return db.insertOrThrow(TABLE_NAME, null, content);
+		
+	}
+
+}
+

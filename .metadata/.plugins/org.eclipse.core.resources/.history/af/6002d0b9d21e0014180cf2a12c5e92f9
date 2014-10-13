@@ -1,0 +1,97 @@
+package com.cardmanager;
+
+import android.content.ContentValues;
+import android.content.Context;
+import android.database.Cursor;
+import android.database.SQLException;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
+import android.widget.Toast;
+
+public class RegisterHandler {
+	
+	
+	public static final String FULL_NAME = "fullname";
+	public static final String EMAIL = "email";
+	public static final String MOBILE = "mobile_no";
+	public static final String PASSWORD = "password";
+	public static final String TABLE_NAME = "user_detail";
+	public static final String DATABASE_NAME = "card";
+	public static final int  DATABASE_VERSION = 1;
+	public static final String USER_TABLE_CREATE = "create table "+TABLE_NAME+" (id integer primary key autoincrement,"+EMAIL+" text not"
+			+ " null,"+FULL_NAME+" text not null, "+PASSWORD+" text not null,"+MOBILE+" text not null);";
+	
+	
+	
+	DataBaseHelper dbhelper;
+	Context ctx;
+	SQLiteDatabase db;
+	public  RegisterHandler(Context ctx){
+		this.ctx = ctx;
+		dbhelper = new DataBaseHelper(ctx);
+	}
+	private static class DataBaseHelper extends SQLiteOpenHelper{
+
+		public DataBaseHelper(Context ctx) {
+			super(ctx, DATABASE_NAME, null, DATABASE_VERSION);
+			
+		}
+
+		@Override
+		public void onCreate(SQLiteDatabase db) {
+			try{
+				db.execSQL(USER_TABLE_CREATE);
+			}catch(SQLException e)
+			{
+				e.printStackTrace();
+			}
+		}
+
+		@Override
+		public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+			
+			
+			db.execSQL("DROP TABLE IF EXISTS "+TABLE_NAME);
+			onCreate(db);
+		}
+		
+	}
+			
+	public RegisterHandler open(){
+		
+		db = dbhelper.getWritableDatabase();
+		return this;
+	}
+	
+	public void close(){
+		dbhelper.close();
+	}
+	
+	public long registerUser(String full_name,String email,String passwd,String phone){
+		ContentValues content = new ContentValues();
+		content.put(FULL_NAME, full_name);
+		content.put(EMAIL, email);
+		content.put(PASSWORD, passwd);
+		content.put(MOBILE, phone);
+        return db.insertOrThrow(TABLE_NAME, null, content);
+		
+	}
+	
+	
+	
+	public boolean login(String email1, String passwd2) throws SQLException
+	{
+		Toast.makeText(ctx, email1+passwd2, Toast.LENGTH_SHORT).show();
+		//Cursor c = db.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE EMAIL=? AND PASSWORD=?", new String[]{email1,passwd2});
+		//Cursor c = db.query(TABLE_NAME, new String[]{EMAIL,PASSWORD},"EMAIL=? AND PASSWORD=?",new String[]{email1, passwd2}, null, null, null);
+		Cursor c = db.query(TABLE_NAME, new String[]{EMAIL,PASSWORD},null,null, null, null, null);
+			if(c.getCount() > 0)
+			{
+				Toast.makeText(ctx, c.getString(0)+" "+ c.getString(1), Toast.LENGTH_SHORT).show();
+				return true;
+			}
+			else{
+		return false;
+			}
+	} 
+}
